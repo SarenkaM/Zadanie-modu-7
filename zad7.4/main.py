@@ -2,7 +2,6 @@ from faker import Faker
 
 fake = Faker("pl_PL")
 import random
-import black
 
 
 class Movie:
@@ -35,8 +34,9 @@ class Series(Movie):
         return f"{self.title} {self.year} {self.species} {self.number_of_plays} {self.season} {self.episode}"
 
 
-def get_class(zmienna, new_list, search_type):
-    for i in zmienna:
+def get_class(lista, search_type):
+    new_list = []
+    for i in lista:
         if type(i) == search_type:
             new_list.append(i)
     lista1 = sorted(new_list, key=lambda x: x.title)
@@ -44,30 +44,11 @@ def get_class(zmienna, new_list, search_type):
 
 
 def get_movies(x):
-    get_class(x, lista_movie, Movie)
-    return lista_movie
+    return get_class(x, Movie)
 
 
 def get_series(x):
-    get_class(x, lista_series, Series)
-    return lista_series
-
-
-"""    
-    for i in lista:
-        if type(i) == Movie:
-            lista_movie.append(i)
-    lista1 = sorted(lista_movie, key=lambda movie: movie.title)
-    return lista1
-
-
-def get_series(lista):
-    for i in lista:
-        if type(i) == Series:
-            lista_series.append(i)
-    lista2 = sorted(lista_series, key=lambda series: series.title)
-    return lista2
-"""
+    return get_class(x, Series)
 
 
 def search(lista):
@@ -87,7 +68,7 @@ def generate_views(lista):
 
 
 def generate_views_10(lista):
-    for i in range(11):
+    for i in range(10):
         generate_views(lista)
 
 
